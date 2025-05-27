@@ -49,7 +49,9 @@ To evaluate your own judge, you can define the `JudgeCustom` object here [class]
 If you want to reevaluate one of the 4480 judge configuration, you can run
 
 ```
+# Evaluate the length judge baseline on the test split of PandaLM dataset
 PYTHONPATH=. python judgetuning/script/evaluate_human_agreement.py --expid test --judge_class judge-length --dataset pandalm --split test
+# Evaluate one of our 4480 configuration on the val split of LMSys
 PYTHONPATH=. python judgetuning/script/evaluate_human_agreement.py --expid test --judge_class judge-option --dataset lmsys \
 --split val --provide_confidence 1 --provide_example 0 --json_output 1 --temperature 0.001 --score_type likert 
 ```
