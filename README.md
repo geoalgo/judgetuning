@@ -24,18 +24,32 @@ pip install -r requirements.txt
 PYTHONPATH=. python results_scripts/figure1.py 
 ```
 
+For JudgeLM evaluations, you will need to do those additional steps:
+
+```
+git clone https://github.com/baaivision/JudgeLM
+cd JudgeLM
+pip3 install --upgrade pip 
+pip3 install -e .
+pip install flash-attn==2.0.4 --no-build-isolation
+pip install pydantic==2.10.0 #correcting the version again
+```
 
 ## Evaluating a judge
 
-### Reevaluating a given judge configuration
+### Evaluating your own judge
+
+To evaluate your own judge, you can define the `JudgeCustom` object here [class](judgetuning/judge/judge_custom.py). This will require you to define:
+- `preference`: the function you use for judging which output is preferred.
+- `swap`: flag for indicating the positions of the outputs were swapped for future analysis of position bias.
+- `judge_completion`: the text completion from an LLM judge used for evaluating `preference` (this one is optional)
+
+### Reevaluating a given judge configurations
 
 If you want to reevaluate one of the 4480 judge configuration, you can run
 
 ```
-# Evaluate the length judge baseline on the test split of PandaLM dataset
 PYTHONPATH=. python judgetuning/script/evaluate_human_agreement.py --expid test --judge_class judge-length --dataset pandalm --split test
-
-# Evaluate one of our 4480 configuration on the val split of LMSys dataset
 PYTHONPATH=. python judgetuning/script/evaluate_human_agreement.py --expid test --judge_class judge-option --dataset lmsys \
 --split val --provide_confidence 1 --provide_example 0 --json_output 1 --temperature 0.001 --score_type likert 
 ```
@@ -52,14 +66,24 @@ PYTHONPATH=. python judgetuning/script/evaluate_spearman_correlation.py  --expid
 ```
 As above, you can customize the judge and other options, see `parse_args` to get the list of supported options.
 
-
-### Evaluating your own judge
-
-TODO Omar.
-
 ### Evaluating baselines
 
-TODO Omar.
+To regenerate the PandaLM and JudgeLM, you need to create the datasets and then run the human agreement score. 
+
+To generate the datasets, run the following:
+- for the llmsys datasets: `python judgetuning/annotation_dataset/tables/tables_lmsys_kaggle.py`
+- for the pandalm datasets: `python judgetuning/annotation_dataset/tables/tables_pandalm.py`
+
+To regenerate the results, run the following:
+```bash
+METHOD=judge-lm7b  # can also be judge-pandalm
+DATASET=lmsys 
+# evaluate judgelm on human agreement
+python judgetuning/script/evaluate_human_agreement.py --judge_class=$METHOD --max_len_prompt=8192 --max_pred_len=1024 --split=test --dataset=$DATASET --expid=random_run
+```
+- for evaluating JudgeLM on LLMSyS, set `METHOD` to `judge-lm7b`
+- for evaluating PandaLM on LLMSyS, set `METHOD` to `judge-pandalm`
+- for evaluating PandaLM on PandaLM dataset, set `METHOD` to `judge-pandalm` and `DATASET` to `pandalm`
 
 ## Computing Multiobjective Successive-Halving
 

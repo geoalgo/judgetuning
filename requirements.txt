@@ -24,7 +24,11 @@ huggingface_hub  # downloading datasets
 openai
 together
 ollama
+vllm
 # for smol tokenisation, we could consider to remove it
 transformers
 
 tiktoken
+
+# for pandalm
+accelerate
