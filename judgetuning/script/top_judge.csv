@@ -1,0 +1,4 @@
+human_agreement,cost,model,provide_confidence,provide_example,provide_answer,provide_explanation,json_output,n_sample_with_shift,score_type,temperature,name
+0.4749154453213078,0.00019006631623449412,google/gemma-2-9b-it,False,False,False,False,False,1,pair,0.1,Ours-small
+0.5008455467869222,0.0004830534385568862,Qwen/Qwen2.5-32B-Instruct-GPTQ-Int8,False,False,False,False,True,0,pair,0.0,Ours-medium
+0.5174746335963923,0.00046441330326937614,neuralmagic/Meta-Llama-3.1-70B-Instruct-FP8,False,False,False,False,False,1,pair,0.0001,Ours-large

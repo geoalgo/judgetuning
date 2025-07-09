@@ -1,6 +1,14 @@
 # Judge Tuning
 
-This repository allows to tune judge configurations and reproduce the results of [this ICML 2025 paper](https://arxiv.org/abs/2501.17178).
+This repository contains the code to access tuned judge configurations and reproduce the results of our ICML 2025 paper: [Tuning LLM Judge Design Decisions for 1/1000 of the Cost](https://arxiv.org/abs/2501.17178).
+
+LLM-based judges are becoming increasingly popular for evaluating generative models, but they can be expensive and their performance can vary greatly depending on their configuration. We asked ourselves: can we find a way to tune these judges to be both accurate and cost-effective?
+
+We introduce a new method for tuning LLM judges that is up to **1000 times cheaper** than traditional methods by using better metrics and multifidelity and multiobjective optimization. 
+
+Our approach allows to find judge configurations for any trade-off of cost and accuracy. 
+We share in particular a small, medium, and large judge with 9B, 32B and 70B parameters. 
+Those outperforms judges based on closed models while using just open-weights models.
 
 ## How to install
 
@@ -35,7 +43,12 @@ pip install flash-attn==2.0.4 --no-build-isolation
 pip install pydantic==2.10.0 #correcting the version again
 ```
 
-## Evaluating a judge
+## Running a tuned judge configuration
+
+The top configurations we found for small, medium, and large judges are available in [top_judge.csv](judgetuning/script/top_judge.csv).
+
+Check out [judge_example.py](judge_example.py) for an example of how to use a judge to annotate an example.
+
 
 ### Evaluating your own judge
 
@@ -87,9 +100,10 @@ python judgetuning/script/evaluate_human_agreement.py --judge_class=$METHOD --ma
 - for evaluating PandaLM on LLMSyS, set `METHOD` to `judge-pandalm`
 - for evaluating PandaLM on PandaLM dataset, set `METHOD` to `judge-pandalm` and `DATASET` to `pandalm`
 
-## Computing Multiobjective Successive-Halving
+## Computing Multi-objective Successive-Halving
 
-TODO David.
+See [run_selection.py](judgetuning/script/run_selection.py) for an example on how to perform the multiobjective 
+multifidelity selection.
 
 ## Generating figures & results
 
