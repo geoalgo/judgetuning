@@ -122,11 +122,11 @@ If you use this work in your research, please cite the following paper:
 
 ```bibtex
 @inproceedings{
-salinas2025tuning,
-title={Tuning {LLM} Judge Design Decisions for 1/1000 of the Cost},
-author={David Salinas and Omar Swelam and Frank Hutter},
-booktitle={Forty-second International Conference on Machine Learning},
-year={2025},
-url={https://openreview.net/forum?id=cve4NOiyVp}
+  salinas2025tuning,
+  title={Tuning {LLM} Judge Design Decisions for 1/1000 of the Cost},
+  author={David Salinas and Omar Swelam and Frank Hutter},
+  booktitle={Forty-second International Conference on Machine Learning},
+  year={2025},
+  url={https://openreview.net/forum?id=cve4NOiyVp}
 }
 ```
