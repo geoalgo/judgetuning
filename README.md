@@ -120,7 +120,7 @@ where you can replace by the name of figure/table needed.
 
 If you use this work in your research, please cite the following paper:
 
-```bash
+```bibtex
 @inproceedings{
 salinas2025tuning,
 title={Tuning {LLM} Judge Design Decisions for 1/1000 of the Cost},
