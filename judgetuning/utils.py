@@ -22,7 +22,7 @@ def upload_hf(name: str, local_path: Path):
     api = HfApi()
     api.upload_folder(
         folder_path=local_path,
-        repo_id="geoalgo/llmjudge",
+        repo_id="judge-arena/judge-arena-dataset",
         path_in_repo=name,
         commit_message=f"Upload {name}",
         repo_type="dataset",
@@ -34,7 +34,7 @@ def download_hf(name: str, local_path: Path):
     local_path.mkdir(exist_ok=True, parents=True)
     # downloads the model from huggingface into `local_path` folder
     snapshot_download(
-        repo_id="geoalgo/llmjudge",
+        repo_id="judge-arena/judge-arena-dataset",
         repo_type="dataset",
         allow_patterns=f"*{name}*",
         local_dir=local_path,

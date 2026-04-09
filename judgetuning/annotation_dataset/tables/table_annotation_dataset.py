@@ -324,7 +324,7 @@ class TableAnnotationDataset(AnnotationDataset):
             api.upload_file(
                 path_or_fileobj=self.table_root / file,
                 path_in_repo=str(file),
-                repo_id="geoalgo/llmjudge",
+                repo_id="judge-arena/judge-arena-dataset",
                 commit_message=f"Upload {str(file)}",
                 repo_type="dataset",
                 token=os.getenv("HF_TOKEN"),
